@@ -1,38 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   align-items: center;
+  padding: 0px 100px;
+}
+
+.navbar {
+  display: flex;
+  width: 73vw;
+  justify-content: space-between;
+  font-size: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.all-jobs {
+  padding: 7px 24px;
+  border-bottom: 2px solid #000;
+}
+
+.banner {
+  width: 100vw;
+  height: 243px;
+  display: flex;
+  align-items: center;
+  background-image: url("./imgs/banner.png");
+  background-position: center;
+   --contentWidth: 73vw;
+  padding: 2rem calc((100% - var(--contentWidth)) / 2);
+}
+
+#search {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 15px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #E2E8F0;
+  width: 73vw;
+  margin: 43px auto;
+}
+
+.jobs-and-department-wrapper {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
 }
 
-.App-link {
-  color: #61dafb;
+.job {
+  display: flex;
+  align-items: flex-start;
+  padding: 43px 43px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.job:hover {
+  color: blue;
+}
+
+.job-text {
+  width: 300px;
+}
+
+.title {
+  margin-bottom: 6px;
+}
+
+.company {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 13px;
+}
+
+.overview {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.forward {
+  padding-top: 3px;
 }
