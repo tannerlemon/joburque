@@ -5,6 +5,8 @@ import searchIcon from "./imgs/search.svg";
 import forward from "./imgs/forward.svg";
 
 function App() {
+  let departments = [];
+
   return (
     <div className="App">
       <div className="navbar">
@@ -23,9 +25,26 @@ function App() {
           <input id="search" placeholder="Search jobs..." />
         </div>
         <div className="jobs-and-department-wrapper">
-          <div className="departments-wrapper"></div>
+          <div className="departments-wrapper">
+            <h3 className="h3">Departments</h3>
+            <div className="departments">
+              {jobs.map((job) => {
+                if (!departments.includes(job.department)) {
+                  departments.push(job.department);
+                }
+              })}
+              {departments.map((department) => {
+                return (
+                  <div>
+                    <div className="department">{department}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           <div className="job-wrapper">
+            <h3 className="featured">Featured Roles</h3>
             {jobs.map((job) => {
               return (
                 <div className="job">
