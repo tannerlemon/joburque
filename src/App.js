@@ -1,11 +1,39 @@
+import { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import jobs from "./Jobs.js";
+import allJobs from "./Jobs.js";
 import searchIcon from "./imgs/search.svg";
 import forward from "./imgs/forward.svg";
 
+let departments = [];
+
+function getDepartments() {
+  allJobs.forEach((job) => {
+    if (!departments.includes(job.department)) {
+      departments.push(job.department);
+    }
+  });
+}
+
 function App() {
-  let departments = [];
+  
+  let [jobs, setJobs] = useState(allJobs);
+
+  
+
+  function showAllJobs() {
+    setJobs(allJobs);
+  }
+
+  function handleDepartmentClick(e) {
+    let value = e.target.innerText;
+    let filteredJobs = allJobs.filter((job) => {
+      return job.department === value;
+    });
+    setJobs(filteredJobs);
+  }
+
+  
 
   return (
     <div className="App">
@@ -28,18 +56,28 @@ function App() {
           <div className="departments-wrapper">
             <h3 className="h3">Departments</h3>
             <div className="departments">
-              {jobs.map((job) => {
-                if (!departments.includes(job.department)) {
-                  departments.push(job.department);
-                  
-                }
-                return null;
-              })}
-              <div className="department" id="all_departments">All Departments</div>
-              {departments.map((department) => {
+              <div
+                className="department"
+                id="all_departments"
+                onClick={() => {
+                  showAllJobs();
+                }}
+              >
+                All Departments
+              </div>
+            
+              {departments.map((department, i) => {
                 return (
                   <div>
-                    <div className="department">{department}</div>
+                    <div
+                      key={i}
+                      className="department"
+                      onClick={(e) => {
+                        handleDepartmentClick(e);
+                      }}
+                    >
+                      {department}
+                    </div>
                   </div>
                 );
               })}
@@ -67,4 +105,5 @@ function App() {
   );
 }
 
+getDepartments();
 export default App;
