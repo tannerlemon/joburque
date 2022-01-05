@@ -4,6 +4,7 @@ import "./App.css";
 import allJobs from "./Jobs.js";
 import searchIcon from "./imgs/search.svg";
 import forward from "./imgs/forward.svg";
+import expand from "./imgs/expand.svg";
 
 let departments = [];
 
@@ -16,16 +17,42 @@ function getDepartments() {
 }
 
 function App() {
-  
   let [jobs, setJobs] = useState(allJobs);
+  let [showingDepartments, setShowingDepartments] = useState(false);
+  let [mobileScreen, setMobileScreen] = useState(false);
 
-  
+  let departmentsMobile = document.querySelectorAll(".department");
+
+  function mobileScreenSize() {
+    if (window.innerWidth <= 790) {
+      setMobileScreen(true);
+    }
+  }
+
+  window.onload = mobileScreenSize;
+  window.onresize = mobileScreenSize;
 
   function showAllJobs() {
     setJobs(allJobs);
+    if (mobileScreen) {
+      departmentsMobile.forEach((department) => {
+        department.style.display = "none";
+        setShowingDepartments(false);
+      });
+      console.log("mobile");
+      console.log(window.innerWidth);
+      console.log(mobileScreen);
+    }
   }
 
   function handleDepartmentClick(e) {
+    if (mobileScreen) {
+      departmentsMobile.forEach((department) => {
+        department.style.display = "none";
+        setShowingDepartments(false);
+      });
+      console.log("mobile");
+    }
     let value = e.target.innerText;
     let filteredJobs = allJobs.filter((job) => {
       return job.department === value;
@@ -33,13 +60,26 @@ function App() {
     setJobs(filteredJobs);
   }
 
-  
+  function showDepartmentsMobile() {
+    if (mobileScreen) {
+      departmentsMobile.forEach((department) => {
+        if (!showingDepartments) {
+          department.style.display = "block";
+          setShowingDepartments(true);
+        } else {
+          department.style.display = "none";
+          setShowingDepartments(false);
+        }
+      });
+      console.log("mobile");
+    }
+  }
 
   return (
     <div className="App">
       <div className="navbar">
         <div className="logo">
-          <img src={logo} alt="" />
+          <img className="logo-img" src={logo} alt="" />
           <div>JoBurque</div>
         </div>
         <div className="all-jobs">All jobs</div>
@@ -54,7 +94,16 @@ function App() {
         </div>
         <div className="jobs-and-department-wrapper">
           <div className="departments-wrapper">
-            <h3 className="h3">Departments</h3>
+            <div
+              className="department-select"
+              onClick={() => {
+                showDepartmentsMobile();
+              }}
+            >
+              <h3 className="h3">Departments</h3>
+              <img className="expand" alt="expand" src={expand} />
+            </div>
+
             <div className="departments">
               <div
                 className="department"
@@ -65,7 +114,7 @@ function App() {
               >
                 All Departments
               </div>
-            
+
               {departments.map((department, i) => {
                 return (
                   <div>
