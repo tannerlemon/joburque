@@ -31,7 +31,9 @@ function App() {
               {jobs.map((job) => {
                 if (!departments.includes(job.department)) {
                   departments.push(job.department);
+                  
                 }
+                return null;
               })}
               <div className="department" id="all_departments">All Departments</div>
               {departments.map((department) => {
