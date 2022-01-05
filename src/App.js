@@ -33,6 +33,7 @@ function App() {
                   departments.push(job.department);
                 }
               })}
+              <div className="department" id="all_departments">All Departments</div>
               {departments.map((department) => {
                 return (
                   <div>
